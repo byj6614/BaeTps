@@ -8,12 +8,14 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
 
+    private Animator ani;
     private CharacterController controller;
     private Vector3 moveDir;
     private float ySpeed = 0;
 
     private void Awake()
     {
+        ani = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
     }
 
@@ -37,6 +39,9 @@ public class PlayerMover : MonoBehaviour
     {
         Vector2 input = value.Get<Vector2>();
         moveDir = new Vector3(input.x,0,input.y);
+
+        ani.SetFloat("XSpeed", input.x,0.1f,Time.deltaTime);
+        ani.SetFloat("YSpeed", input.y,0.1f,Time.deltaTime);
     }
 
     private void Jump()

@@ -7,6 +7,7 @@ public class HomeTPS : MonoBehaviour
 {
     [SerializeField] Transform cameraRoot; //chinema 카메라가 따라갈 위치
     [SerializeField] float mouseSensitivity; //마우스 이동 스피드값
+    [SerializeField] Transform aimTarget;
     private Vector2 lookDelta; //마우스 이동 방향 값 
     private float xRotation; //x축으로 이동할 값
     private float yRotation; //y축으로 이동할 값
@@ -30,7 +31,8 @@ public class HomeTPS : MonoBehaviour
     private void Rotate()       //이해안감
     {
         Vector3 lookPoint = Camera.main.transform.position + Camera.main.transform.forward * 20f;
-        lookPoint.y = transform.position.y;
+        aimTarget.position = lookPoint;
+        lookPoint.y = transform.position.y;        
         transform.LookAt(lookPoint);
     }
     private void Look()
